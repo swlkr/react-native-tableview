@@ -448,6 +448,16 @@ RCT_NOT_IMPLEMENTED(-initWithCoder:(NSCoder *)aDecoder)
     return (NSMutableDictionary *)_sections[section][@"items"][row];
 }
 
+-(NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+     NSMutableArray *keys = [NSMutableArray arrayWithCapacity:[_sections count]];
+
+    for (NSDictionary *section in _sections){
+        [keys addObject:section[@"label"]];
+    }
+
+    return keys;
+}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (![self hasCustomCells:indexPath.section]){
         NSNumber *styleHeight = _sections[indexPath.section][@"items"][indexPath.row][@"height"];
