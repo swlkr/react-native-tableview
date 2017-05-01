@@ -449,10 +449,12 @@ RCT_NOT_IMPLEMENTED(-initWithCoder:(NSCoder *)aDecoder)
 }
 
 -(NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-     NSMutableArray *keys = [NSMutableArray arrayWithCapacity:[_sections count]];
+    NSMutableArray *keys = [NSMutableArray arrayWithCapacity:[_sections count]];
 
     for (NSDictionary *section in _sections){
-        [keys addObject:section[@"label"]];
+        if([section objectForKey:@"label"]) {
+            [keys addObject:section[@"label"]];
+        }
     }
 
     return keys;
